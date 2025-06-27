@@ -10,19 +10,22 @@ import java.util.HashMap;
 
 class Solution {
     public int lengthOfLongestSubstring(String s) {
-
         int longest = 0;
-        int n = s.length();
+        int j = 0;
+        HashMap<Character, Integer> mp = new HashMap<>();
 
-        HashMap<Integer, Integer> mp = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (mp.containsKey(ch) && mp.get(ch) >= j) {
+                j = mp.get(ch) + 1;
+            }
 
-        for (int i = 0; i < n; i++) {
-
+            mp.put(ch, i);
+            longest = Math.max(longest, i - j + 1);
         }
 
         return longest;
-
     }
 }
-// @lc code=end
 
+// @lc code=end
